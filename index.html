@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Queer Nerds York is a small, informal monthly social for LGBTQ+ adults in York. Find out when we're meeting next.">
+  <meta name="description" content="Queer Nerds York is a small, informal monthly social for LGBTQ+ adults in York. Contact the organisers to come along.">
   <meta name="referrer" content="no-referrer">
   <title>Queer Nerds York</title>
   <style>
@@ -63,7 +63,7 @@
 
     header > p:last-child { max-width: 54ch; }
 
-    /* One shared card: upcoming details and a quieter history column. */
+    /* One shared card: contact details and a quieter history column. */
     .meetup-layout {
       display: grid;
       grid-template-columns: minmax(0, 2.15fr) minmax(10rem, .85fr);
@@ -128,53 +128,10 @@
       letter-spacing: -.025em;
     }
 
-    dl {
-      display: grid;
-      grid-template-columns: 3.8rem 1fr;
-      gap: .45rem 1rem;
-      margin-block: 1rem;
-    }
-
-    dt { color: var(--muted); }
-    dd { margin: 0; font-weight: 650; }
-
     .attendance-note {
-      padding-top: 1rem;
-      border-top: 1px solid var(--line);
+      margin-top: 1rem;
+      max-width: 50ch;
     }
-
-    .venue-help {
-      margin: .15rem 0 1rem;
-      color: var(--muted);
-      font-size: .95rem;
-    }
-
-    .venue-help a {
-      color: var(--purple);
-      text-underline-offset: .2em;
-    }
-
-    .calendar-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .65rem;
-      margin: 0 0 1rem;
-    }
-
-    .calendar-links a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 2.75rem;
-      padding: .4rem .8rem;
-      border: 1px solid #d7c8df;
-      border-radius: .6rem;
-      color: var(--purple);
-      font-weight: 650;
-      text-underline-offset: .2em;
-    }
-
-    .calendar-links a:hover { background: #efe8f4; }
-    .calendar-links[hidden] { display: none; }
 
     .contact-links {
       display: flex;
@@ -241,30 +198,13 @@
     </header>
 
     <div class="meetup-layout">
-      <section class="meetup" aria-labelledby="next-meetup">
-      <h2 id="next-meetup">Next meetup</h2>
-      <!-- Edit only the nextMeetup block at the bottom of this file each month. -->
-      <dl>
-        <dt>Date</dt>
-        <dd id="meetup-date">To be announced</dd>
-        <dt>Time</dt>
-        <dd id="meetup-time">To be announced</dd>
-        <dt>Venue</dt>
-        <dd id="meetup-venue">To be confirmed</dd>
-      </dl>
-      <p class="venue-help">
-        <span id="venue-help-text">Our usual meeting place is City Screen Picturehouse, 13–17 Coney Street.</span>
-        <a id="venue-map" href="https://www.google.com/maps/dir/?api=1&amp;destination=City%20Screen%20Picturehouse%2C%2013-17%20Coney%20Street%2C%20York%20YO1%209QL" target="_blank" rel="noopener noreferrer">Get directions on Google Maps</a>
-      </p>
-      <div class="calendar-links" id="calendar-links" hidden>
-        <a id="google-calendar" href="#" target="_blank" rel="noopener noreferrer">Add to Google Calendar</a>
-        <a id="ics-calendar" href="#" download="queer-nerds-york.ics">Apple / Outlook (.ics)</a>
-      </div>
-      <p class="attendance-note">Interested in coming along? Please message Rhys or Ross first. We'll let you know the details of the next meetup, and you're welcome to ask questions.</p>
-      <div class="contact-links">
-        <a class="whatsapp-link" href="https://wa.me/447500668263" target="_blank" rel="noopener noreferrer">WhatsApp Rhys</a>
-        <a class="whatsapp-link" href="https://wa.me/447907324447" target="_blank" rel="noopener noreferrer">WhatsApp Ross</a>
-      </div>
+      <section class="meetup" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Interested in coming along?</h2>
+        <p class="attendance-note">Please message Rhys or Ross first. We'll let you know the details of the next meetup, and you're welcome to ask questions.</p>
+        <div class="contact-links">
+          <a class="whatsapp-link" href="https://wa.me/447500668263" target="_blank" rel="noopener noreferrer">WhatsApp Rhys</a>
+          <a class="whatsapp-link" href="https://wa.me/447907324447" target="_blank" rel="noopener noreferrer">WhatsApp Ross</a>
+        </div>
       </section>
       <aside class="past-meetups" aria-labelledby="past-meetups-heading">
         <h2 id="past-meetups-heading">Prior meetups</h2>
@@ -293,155 +233,6 @@
     </section>
 
   </main>
-  <script>
-    // NEXT MEETUP — edit these five values when the next meeting is confirmed.
-    // Date: YYYY-MM-DD. Times: 24-hour HH:MM. End time is needed for calendars.
-    // Keep values empty until confirmed. All times are Europe/London (GMT/BST).
-    const nextMeetup = {
-      date: "",
-      start: "",
-      end: "",
-      venue: "",
-      address: ""
-    };
 
-    // The group's usual venue, shown only as a fallback until confirmed.
-    const usualVenue = {
-      venue: "City Screen Picturehouse",
-      address: "13–17 Coney Street, York YO1 9QL"
-    };
-
-    const meetupDate = document.getElementById("meetup-date");
-    const meetupTime = document.getElementById("meetup-time");
-    const meetupVenue = document.getElementById("meetup-venue");
-    const venueHelpText = document.getElementById("venue-help-text");
-    const venueMap = document.getElementById("venue-map");
-    const calendarLinks = document.getElementById("calendar-links");
-
-    function validDate(value) {
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-      const date = new Date(value + "T12:00:00Z");
-      return !Number.isNaN(date.getTime()) &&
-        date.toISOString().slice(0, 10) === value;
-    }
-
-    function validTime(value) {
-      return /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(value);
-    }
-
-    function mapDirections(place) {
-      const url = new URL("https://www.google.com/maps/dir/");
-      url.searchParams.set("api", "1");
-      url.searchParams.set("destination", place);
-      return url.toString();
-    }
-
-    const dateOK = validDate(nextMeetup.date);
-    const startOK = validTime(nextMeetup.start);
-    const endOK = validTime(nextMeetup.end);
-    const venue = nextMeetup.venue.trim();
-    const address = nextMeetup.address.trim();
-
-    if (dateOK) {
-      const date = new Date(nextMeetup.date + "T12:00:00Z");
-      meetupDate.textContent = new Intl.DateTimeFormat("en-GB", {
-        timeZone: "Europe/London", weekday: "long", day: "numeric",
-        month: "long", year: "numeric"
-      }).format(date);
-    }
-
-    if (startOK) {
-      meetupTime.textContent = nextMeetup.start +
-        (endOK ? "–" + nextMeetup.end : "");
-    }
-
-    if (venue) {
-      meetupVenue.textContent = venue;
-      const location = venue + (address ? ", " + address :
-        (venue.toLowerCase() === usualVenue.venue.toLowerCase() ?
-          ", " + usualVenue.address : ", York"));
-      venueHelpText.textContent = address ? address : "Directions to the meetup:";
-      venueMap.href = mapDirections(location);
-    } else {
-      venueMap.href = mapDirections(usualVenue.venue + ", " + usualVenue.address);
-    }
-
-    // Calendar links appear only when date, both times and venue are confirmed.
-    // Meetings are assumed to end on the same date they start.
-    if (dateOK && startOK && endOK && nextMeetup.end > nextMeetup.start && venue) {
-      const datePart = nextMeetup.date.replace(/-/g, "");
-      const toCalendarTime = (value) => datePart + "T" +
-        value.replace(":", "") + "00";
-      const startLocal = toCalendarTime(nextMeetup.start);
-      const endLocal = toCalendarTime(nextMeetup.end);
-      const location = venue + (address ? ", " + address :
-        (venue.toLowerCase() === usualVenue.venue.toLowerCase() ?
-          ", " + usualVenue.address : ", York"));
-      const description = "Please message Rhys beforehand to confirm attendance. " +
-        "More information: https://qn-york.github.io/";
-      const title = "Queer Nerds York meetup";
-
-      const google = new URL("https://calendar.google.com/calendar/render");
-      google.searchParams.set("action", "TEMPLATE");
-      google.searchParams.set("text", title);
-      google.searchParams.set("dates", startLocal + "/" + endLocal);
-      google.searchParams.set("ctz", "Europe/London");
-      google.searchParams.set("location", location);
-      google.searchParams.set("details", description);
-      document.getElementById("google-calendar").href = google.toString();
-
-      function escapeICS(value) {
-        return value.replace(/\\/g, "\\\\").replace(/\r?\n/g, "\\n")
-          .replace(/,/g, "\\,").replace(/;/g, "\\;");
-      }
-
-      function foldICSLine(line) {
-        // Fold at 75 UTF-8 octets, as required by the calendar file format.
-        let result = "", bytes = 0;
-        for (const character of line) {
-          const length = new TextEncoder().encode(character).length;
-          if (bytes + length > 75) {
-            result += "\r\n ";
-            bytes = 1;
-          }
-          result += character;
-          bytes += length;
-        }
-        return result;
-      }
-
-      const stamp = new Date().toISOString().replace(/[-:]/g, "")
-        .replace(/\.\d{3}/, "");
-      const lines = [
-        "BEGIN:VCALENDAR", "VERSION:2.0",
-        "PRODID:-//Queer Nerds York//Meetup Calendar//EN",
-        "CALSCALE:GREGORIAN",
-        "BEGIN:VTIMEZONE", "TZID:Europe/London",
-        "BEGIN:DAYLIGHT", "TZOFFSETFROM:+0000", "TZOFFSETTO:+0100",
-        "TZNAME:BST", "DTSTART:19960331T010000",
-        "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU", "END:DAYLIGHT",
-        "BEGIN:STANDARD", "TZOFFSETFROM:+0100", "TZOFFSETTO:+0000",
-        "TZNAME:GMT", "DTSTART:19961027T020000",
-        "RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU", "END:STANDARD",
-        "END:VTIMEZONE", "BEGIN:VEVENT",
-        "UID:" + datePart + "-" + nextMeetup.start.replace(":", "") +
-          "@qn-york.github.io",
-        "DTSTAMP:" + stamp,
-        "DTSTART;TZID=Europe/London:" + startLocal,
-        "DTEND;TZID=Europe/London:" + endLocal,
-        "SUMMARY:" + escapeICS(title),
-        "LOCATION:" + escapeICS(location),
-        "DESCRIPTION:" + escapeICS(description),
-        "URL:https://qn-york.github.io/",
-        "END:VEVENT", "END:VCALENDAR"
-      ];
-      const ics = lines.map(foldICSLine).join("\r\n") + "\r\n";
-      const file = new Blob([ics], { type: "text/calendar;charset=utf-8" });
-      const download = document.getElementById("ics-calendar");
-      download.href = URL.createObjectURL(file);
-      download.download = "queer-nerds-york-" + nextMeetup.date + ".ics";
-      calendarLinks.hidden = false;
-    }
-  </script>
 </body>
 </html>
