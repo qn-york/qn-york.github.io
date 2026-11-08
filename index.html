@@ -63,12 +63,11 @@
 
     header > p:last-child { max-width: 54ch; }
 
-    /* One shared card: contact details and a quieter history column. */
+    /* One shared card, with prior meetups beneath the contact details at all sizes. */
     .meetup-layout {
       display: grid;
-      grid-template-columns: minmax(0, 2.15fr) minmax(10rem, .85fr);
-      gap: clamp(1.25rem, 3vw, 1.75rem);
-      align-items: start;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
       background: #fff;
       border: 1px solid var(--line);
       border-radius: 1.25rem;
@@ -81,8 +80,8 @@
 
     .past-meetups {
       min-width: 0;
-      padding-left: 1.25rem;
-      border-left: 1px solid var(--line);
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
       color: var(--muted);
     }
 
@@ -94,6 +93,7 @@
 
     .past-meetups ul {
       display: grid;
+      grid-template-columns: minmax(0, 1fr);
       gap: .55rem;
       list-style: none;
       margin: .9rem 0 0;
@@ -104,22 +104,6 @@
       font-size: .9rem;
       line-height: 1.45;
       font-variant-numeric: tabular-nums;
-    }
-
-    @media (max-width: 680px) {
-      .meetup-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .past-meetups {
-        border-left: 0;
-        border-top: 1px solid var(--line);
-        padding: 1rem 0 0;
-      }
-
-      .past-meetups ul {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
     }
 
     h2 {
