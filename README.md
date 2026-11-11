@@ -1,3 +1,3 @@
 # Queer Nerds York
 
-Website: https://qn-york.github.io/
+Website: https://qn-york.github.io
